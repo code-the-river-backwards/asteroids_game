@@ -7,19 +7,33 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
     
+    # initializing pygame
     pygame.init()
+    
+    # resolution
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    
+    # fps and frame time logic from pygame
+    clock = pygame.time.Clock()
+    dt = 0
 
+
+    # main game loop
     while True:
         
         log_state()
         
+        # working quit button
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
 
         screen.fill("black")
         pygame.display.flip()
+
+        # FPS and frame time
+        clock.tick(60)
+        dt = clock.tick(60) / 1000
 
 if __name__ == "__main__":
     main()
