@@ -21,15 +21,32 @@ class Player(CircleShape):
     def draw(self, screen):
         pygame.draw.polygon(screen, "white", self.triangle(), LINE_WIDTH )
 
+    # rotation logic
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
         return self.rotation
 
+    # move forward / backwards logic
+    def move(self, dt):
+        unit_vector = pygame.Vector2(0, 1)
+        rotated_vector = unit_vector.rotate(self.rotation)
+        rotated_with_speed_vector = rotated_vector * PLAYER_SPEED * dt
+        self.position += rotated_with_speed_vector
+
+    # updating player position after rotation or movement or both
     def update(self, dt):
        keys = pygame.key.get_pressed()
 
+        # rotation keys
        if keys[pygame.K_a]:
            self.rotate(-dt)
-
        if keys[pygame.K_d]:
            self.rotate(dt)
+
+        # move up / down keys
+       if keys[pygame.K_w]:
+           self.move(dt)
+       if keys[pygame.K_s]:
+           self.move(-dt)
+
+
