@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 from logger import log_state
+from player import Player
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -17,6 +18,8 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    # Player Object( instance
+    player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2, radius=PLAYER_RADIUS)
 
     # main game loop
     while True:
@@ -28,7 +31,12 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
+
         screen.fill("black")
+        
+        # drawing the player
+        player.draw(screen)
+
         pygame.display.flip()
 
         # FPS and frame time
