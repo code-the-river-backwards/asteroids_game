@@ -35,8 +35,9 @@ def main():
         screen.fill("black")
         
         # drawing the player
+        ## rotating the player before rendering
+        player.update(dt)
         player.draw(screen)
-
         pygame.display.flip()
 
         # FPS and frame time
