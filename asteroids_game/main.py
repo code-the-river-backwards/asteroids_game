@@ -17,9 +17,18 @@ def main():
     # fps and frame time logic from pygame
     clock = pygame.time.Clock()
     dt = 0
+    
+    # 2 empty pygame groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
 
-    # Player Object( instance
+    # adding all future instances of the Player class to both groups (updatable and drawable)
+    Player.containers = (updatable, drawable)
+
+    # Player Object instance
     player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2, radius=PLAYER_RADIUS)
+
+
 
     # main game loop
     while True:
@@ -36,8 +45,9 @@ def main():
         
         # drawing the player
         ## rotating the player before rendering
-        player.update(dt)
-        player.draw(screen)
+        updatable.update(dt)
+        for thing in drawable:
+            thing.draw(screen)
         pygame.display.flip()
 
         # FPS and frame time
