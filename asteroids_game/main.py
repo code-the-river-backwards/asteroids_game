@@ -2,6 +2,8 @@ import pygame
 from constants import *
 from logger import log_state
 from player import Player
+from asteroid import *
+from asteroidfield import AsteroidField
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -21,14 +23,20 @@ def main():
     # 2 empty pygame groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
-
     # adding all future instances of the Player class to both groups (updatable and drawable)
     Player.containers = (updatable, drawable)
-
     # Player Object instance
     player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2, radius=PLAYER_RADIUS)
 
+    # new asteroids group
+    asteroids = pygame.sprite.Group()
+    # adding any future instances of the Asteroids class to the asteroids group
+    Asteroid.containers = (asteroids, updatable, drawable)
 
+    # adding the new AsteroidField class to only the updateable group
+    AsteroidField.containers = (updatable)
+    # and creating a new instance of the AsteroidField class as an object
+    asteroidfield = AsteroidField()
 
     # main game loop
     while True:
