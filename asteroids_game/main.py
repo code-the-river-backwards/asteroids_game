@@ -7,6 +7,7 @@ from player import Player
 from asteroid import *
 from asteroidfield import AsteroidField
 from circleshape import *
+from shot import *
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -35,6 +36,10 @@ def main():
     asteroids = pygame.sprite.Group()
     # adding any future instances of the Asteroids class to the asteroids group
     Asteroid.containers = (asteroids, updatable, drawable)
+
+    # new shots group
+    shots = pygame.sprite.Group()
+    Shot.containers = (shots, drawable, updatable)
 
     # adding the new AsteroidField class to only the updateable group
     AsteroidField.containers = (updatable)
